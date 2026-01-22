@@ -1,0 +1,100 @@
+### Comandos para remover
+```bash
+lvremove lv_storage  
+vgremove vg_storage
+pvremove /dev/sdb
+
+pvs
+vgs
+lvs
+```
+### Próximos passos opcionais (dependendo do uso)
+Reutilizar os discos como filesystem “normal”
+```bash
+wipefs -a /dev/sdb
+wipefs -a /dev/sdc
+wipefs -a /dev/sdd
+```
+Depois:
+```bash
+mkfs.xfs /dev/sdb
+```
+ou
+```bash
+mkfs.ext4 /dev/sdb
+```
+#### Recriar o LVM do zero (se for um lab)
+```bash
+pvcreate /dev/sdb /dev/sdc /dev/sdd
+vgcreate storage /dev/sdb /dev/sdc /dev/sdd
+lvcreate -n lv_storage -l 100%FREE storage
+```
+Verificação final (boa prática)
+```bash
+lsblk
+blkid
+```
+
+### Comando na pratica
+```bash
+# visualize as particoes
+fdisk -l
+
+# create o physical volume
+pvcreate /dev/sdc /dev/sdd
+pvcreate /dev/sde
+# visualize o pv
+pvs
+pvdisplay
+
+# crie o volume group
+vgcreate storage /dev/sdc /dev/sdd
+# visualize o volume group
+vgs
+vgdisplay
+
+# vamos criar logical volume
+lvcreate -L 10G -n lv_storage storage
+# visualize o logical volume
+lvdisplay
+lvs
+
+# O logical volume precisa ser formatado
+mkfs.ext4 /dev/storage/lv_storage
+# crie um diretorio para o ponto de montagem
+mkdir -p /mnt/lv_storage
+# comando para montar o logical volume
+mount /dev/storage/lv_storage /mnt/lv_storage/
+
+# verifique as particoes
+df -h
+# esse comando filtra o logical volume
+mount | grep lv_storage
+
+# Durante a criacao do volume group usamos apenas dois discos, vamos adicionar o terceiro.
+vgextend storage /dev/sde
+# visualize o volume group
+vgdisplay
+
+# Vamos agora extender agora o logical volume, esse comando adiciona mais 10G.
+lvextend -L +10G /dev/storage/lv_storage 
+
+# Visualize a particao, o tambem ainda nao foi alterado
+df -h
+# desmonte a particao
+umount /mnt/lv_storage/
+# Para atualizar o logical volume com o novo tamanho e necessario rodar os dois comandos abaixo:
+e2fsck -f /dev/storage/lv_storage 
+resize2fs /dev/storage/lv_storage
+# Vamos montar o logical volume novamente
+mount /dev/storage/lv_storage /mnt/lv_storage/
+# agora a particao ira mostrar o tamanho atualizado
+df -h
+
+# Para que a particao monte durante o boot temos que adiciona-la no fstab arquivo
+vim /etc/fstab 
+# confirme que tudo esta correto rodando os comando abaixo.
+systemctl daemon-reload
+mount -a
+# reinicie o computador.
+restart

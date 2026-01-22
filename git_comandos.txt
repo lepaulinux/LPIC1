@@ -1,0 +1,26 @@
+# verifica se o git esta instalado no sistema
+which git
+
+# instala o git no sistema baseado no Debian
+sudo apt install git -y
+
+# Crie un diretorio para iniciar o git.
+git init my_repo
+
+# Entre dentro do diretorio
+cd my_repo
+ls -la
+# liste a informacao do file .git
+ls -la .git
+
+# mostra o status do repositorio
+git status
+
+git add <nome-do-file>
+
+git status
+# arquivos que foram modificados estao agora prontos para ser uploaded to git.
+
+
+
+
