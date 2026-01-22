@@ -21,6 +21,56 @@ git add <nome-do-file>
 git status
 # arquivos que foram modificados estao agora prontos para ser uploaded to git.
 
+# Antes de usar o comando commit pela primeira vez voce precisa usar os comandos abaixo.
+git config --global user.name "user-name"
+git config --global user.mail "email-address"
 
+# comando commit
+git commit -m "Digite um comentario aqui" 
+git status
 
+# se vode fez alguma mudanca no arquivo rode o comando abaixo
+git add <nome_do_arquivo>
 
+# fazer upload o file para o github server.
+git commit
+# entre um comentario
+
+# para voltar para uma versao anterior, voce precisa desfazer a mudanca
+# digite o comando abaixo
+git log --oneline
+# mostra as versoes de um arquivo
+
+# para reverter as mudancas digite
+git revert <hash-number>
+
+# importante #
+#
+# 
+# Se quiser clonar um repositorio sair do diretorio atual(repositorio-criado)
+cd ..
+git clone <adicione-endereco-para-clonar>
+# exemplo
+git clone https://github.com/lepaulinux/lepaulinux.git
+
+# volte para o repositorio criado no computador
+cd my_repo
+
+# importante antes the usar o comando pull, crie uma conta not github se ainda nao tiver
+# Logue e crie um repositorio, copie a URL
+git remote add origin <URL-do-repositorio-recen-criado>
+
+# mudamos a origin do repositorio confira com o comando abaixo.
+cat .git/config
+
+# acesse o github para obter o access tokens
+# Clique em username > Settings > Developer Settings > Personal access tokens > Generate new tokens.
+# De um nome, selecione o tipo de acess e clique em Generate Tokens > Generate Tokens.
+# Copie e salve o token que foi gerado.
+
+# vamos executar o comando push
+git push origin master
+# digite o password para o github
+# Depois cole o token que foi copia anteriormente.
+# se tudo estiver certo voce vera uma mensagem "Writin objects 100%"
+# Se voce visitar sua pagina do github, devera ver o arquivo ou arquivos la.
