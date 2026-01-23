@@ -1,0 +1,10 @@
+### Criar memoria swap usando um arquivo
+```
+dd if=/dev/zero of=/mnt/mem_swap bs=1M count=2024
+# men_swap e o nome do arquivo
+# o tamanho sera de 2G
+mkswap /mnt/mem_swap
+sudo chmod 600 /mnt/mem_swap
+swapon
+free -h
+
