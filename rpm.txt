@@ -1,0 +1,31 @@
+rpm -qa
+rpm -qa bash
+rpm -qi bash
+rpm -qc bash
+dnf install vim
+rpm -qi vim
+rpm -qd vim
+
+rpm -qd bash
+rpm -qf /etc/skel/.bashrc
+
+yum install vim
+yum install --downloadonly --downloaddir=/tmp zsh
+ls /tmp/
+cd /tmp/
+
+rpm -qlp zsh-5.8-9.el9.x86_64.rpm 
+rpm -qip zsh-5.8-9.el9.x86_64.rpm 
+
+rpm -ivh zsh-5.8-9.el9.x86_64.rpm 
+
+yum install ./google-chrome-stable_current_x86_64.rpm 
+# rpm -ivh --nodeps zsh-5.8-9.el9.x86_64.rpm 
+# rpm -ivh --force zsh-5.8-9.el9.x86_64.rpm 
+# rpm -e zsh
+rpm -evh zsh
+# yum remove zsh
+yum search vim
+yum update vim
+yum upgrade
+# upgrade todos os aplicativos do sistema
