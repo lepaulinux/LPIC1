@@ -1,0 +1,34 @@
+Controlando a Execução de Comandos
+
+Esse texto mostra como encadear comandos para criar sequências lógicas:
+
+        ; (Ponto e Vírgula): Simplesmente executa um comando após o outro, não importa o resultado. comando1; comando2 sempre executará ambos.      
+                    
+        && (E Lógico): Executa o segundo comando apenas se o primeiro for bem-sucedido. comando1 && comando2 é perfeito para sequências onde o segundo passo depende do sucesso do primeiro.
+  
+        || (OU Lógico): Executa o segundo comando apenas se o primeiro falhar. comando1 || comando2 é ótimo para criar ações de fallback, como "tente fazer isso, se não der, faça aquilo".
+
+Histórico e Ajuda: Ferramentas Essenciais
+                    
+Navegar e obter ajuda na linha de comando é fundamental.
+history: Mostra a lista de todos os comandos que você digitou.
+
+        ![número]: Re-executa um comando específico da lista (ex: !10).
+
+        !!: Re-executa o último comando digitado.
+
+        history -c: Limpa o histórico da sessão atual.
+
+Autocompletar com Tab: A tecla Tab é a melhor amiga do usuário de terminal. Ela autocompleta nomes de comandos, arquivos e pastas, economizando tempo e evitando erros.
+
+Encontrando Ajuda:
+
+        man [comando]: Abre a página de manual completa, com todas as opções e detalhes.
+        
+        [comando] --help: Mostra uma ajuda rápida e resumida diretamente no terminal.
+        
+        whatis [comando]: Dá uma descrição de uma linha sobre o que o comando faz.
+        
+        apropos [termo]: Procura nas páginas de manual por um termo-chave. É útil quando você não sabe o nome do comando, mas sabe o que quer fazer (ex: apropos "copy files").
+
+Ao final desta aula, o aluno tem uma base sólida para trabalhar de forma eficiente e confiante na linha de comando do Linux.
