@@ -1,0 +1,28 @@
+Entrada para Windows no grub
+
+Para adicionar um sistema operacional que o os-prober não detectou automaticamente, utilizamos o arquivo 40_custom.
+
+###inicio-do-arquivo###
+# Passo 1: Habilitar execução do script
+# chmod +x /etc/grub.d/40_custom
+# Passo 2: Editar /etc/grub.d/40_custom
+#!/bin/sh
+exec tail -n +3 $0
+
+menuentry "Windows 10/11 Profissional" --class windows {
+  insmod part_msdos
+  insmod ntfs
+  set root='(/dev/sdb,msdos1)'
+  chainloader +1
+}
+###fim-do-arquivo###
+ 
+### 4. Aplicando as Alterações
+
+Após editar qualquer arquivo em /etc/default/grub ou /etc/grub.d/, você DEVE atualizar o arquivo principal:
+
+Debian / Ubuntu / Kali
+- update-grub
+
+CentOS / RHEL / Fedora
+- grub2-mkconfig -o /boot/grub2/grub.cfg
