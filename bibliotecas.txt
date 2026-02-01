@@ -1,0 +1,40 @@
+# exibe o caminho das bibliotecas
+which vim
+# exibe as bibliotecas utilizadas pelo programa vim
+ldd /usr/bin/vim
+
+# Adicionar um local de biblioteca para teste.
+mkdir /tmp/lib_teste
+# arquivo para adicionar uma biblioteca definitiva
+sudo vim /etc/ld.so.conf
+# Digite o texto abaixo
+include /tmp/lib_teste
+# :wq
+cat /etc/ld.so.conf
+# para atualizar as bibliotecas
+sudo ldconfig
+
+echo $LD_LIBRARY_PATH
+# Ou para adicionar a biblioteca temporariamente
+export LD_LIBRARY_PATH=/tmp/lib_teste
+echo $LD_LIBRARY_PATH
+
+ldconfig # precisa do sudo
+# /sbin/ldconfig.real: Can't create temporary cache file /etc/ld.so.cache~: Permission denied
+sudo ldconfig
+# mostra todas as bibliotecas
+ldconfig -p
+
+# Os dois arquivos importantes
+ld.so.cache  # para declarar biblioteca temporaria
+ld.so.conf   # para declarar biblioteca definitiva
+cd /lib
+cd /usr/lib
+
+# Local dos dois diretorios importantes de bibliotecas:
+# /lib e /usr/lib
+ls /lib > lib.txt
+ls /usr/lib > usr_lib.txt
+diff lib.txt usr_lib.txt 
+diff -s usr_lib.txt lib.txt
+# Return: Files usr_lib.txt and lib.txt are identical
