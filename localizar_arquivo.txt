@@ -1,0 +1,21 @@
+# procurar pelo nome leandro na pasta home
+find /home -name leandro
+  
+# procurar pelo nome LEANDRO na pasta home, nada e encontrado porque o comando find e case sensitive.
+find /home -name LEANDRO
+# para procurar maisculas e minusculas use -iname
+find /home -iname LEANDRO
+  
+# procure arquivo que pertence ao usuario john
+find /home -user john
+  
+# procure por arquivos maiores que 50MB.
+find / -size +50M
+  
+# para mais informacoes leia o manual do comando find.
+man find
+
+# Exemplos encontre todos arquivos que pertence ao usuario leandro e copie para a pasta /opt/pasta
+cd /opt/
+mkdir pasta
+find / -user leandro -type f -exec cp -p {} /opt/pasta/ \;
